@@ -3,7 +3,7 @@
 /node_modules
 /public/plugins
 /public/dist
-
+.env
 # Logs
 logs
 *.log
