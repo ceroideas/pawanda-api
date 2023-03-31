@@ -1,6 +1,7 @@
-import { Controller, Get, Render, Res } from '@nestjs/common';
+import { Controller, Get, Render, Res, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Response } from 'express';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller()
 export class AppController {
@@ -14,6 +15,8 @@ export class AppController {
       message: '¡Bienvenido a mi sitio web!',
     });
   }
+
+  @UseGuards(JwtAuthGuard)
   @Get('admin')
   getAdemin(@Res() res: Response) {
     res.render('admin/index', {

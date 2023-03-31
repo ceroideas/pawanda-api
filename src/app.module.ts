@@ -3,8 +3,10 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RegisterModule } from './auth/register/register.module';
+import { LoginModule } from './auth/login/login.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -20,7 +22,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       entities: [join(__dirname, '**', '*.entity.{ts,js}')],
       synchronize: true,
     }),
-    AuthModule,
+
+    RegisterModule,
+
+    LoginModule,
   ],
   controllers: [AppController],
   providers: [AppService],
