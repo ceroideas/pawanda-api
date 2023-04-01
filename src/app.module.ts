@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RegisterModule } from './auth/register/register.module';
 import { LoginModule } from './auth/login/login.module';
+import { SharedModule } from './shared/shared.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -17,14 +18,14 @@ import { LoginModule } from './auth/login/login.module';
       host: 'localhost',
       username: 'root',
       port: 3306,
-      password: 'video',
+      password: '',
       database: 'pawanda',
       entities: [join(__dirname, '**', '*.entity.{ts,js}')],
       synchronize: true,
     }),
 
     RegisterModule,
-
+    SharedModule,
     LoginModule,
   ],
   controllers: [AppController],
