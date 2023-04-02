@@ -8,22 +8,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { RegisterModule } from './auth/register/register.module';
 import { LoginModule } from './auth/login/login.module';
 import { SharedModule } from './shared/shared.module';
+import { ConfigModule } from './config/config.module';
+import { DatabaseModule } from './database/database.module';
 @Module({
   imports: [
+    ConfigModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      username: 'root',
-      port: 3306,
-      password: '',
-      database: 'pawanda',
-      entities: [join(__dirname, '**', '*.entity.{ts,js}')],
-      synchronize: true,
-    }),
-
+    DatabaseModule,
     RegisterModule,
     SharedModule,
     LoginModule,

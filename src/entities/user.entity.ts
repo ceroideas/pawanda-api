@@ -1,23 +1,27 @@
-
-import {Entity,Column,PrimaryGeneratedColumn} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export default class User {
+export default class Users {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
-  @Column()
-  first_name: string;
+  @Column({ nullable: true })
+  name: string;
 
-  @Column()
-  last_name: string;
-
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   password: string;
 
+  @Column({ nullable: true })
+  phone: string;
+
+  @Column({ nullable: true })
+  photo: string;
+
+  @Column({ nullable: true })
+  status: number;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

@@ -6,6 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "migrate": "ts-node node_modules/.bin/typeorm migration:run",
+    "migration:create": "ts-node node_modules/.bin/typeorm migration:create -n",
+    "migration:revert": "ts-node node_modules/.bin/typeorm migration:revert",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -21,6 +24,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
     "@nestjs/jwt": "^10.0.3",
     "@nestjs/mapped-types": "^1.2.2",
