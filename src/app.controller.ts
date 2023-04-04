@@ -7,22 +7,22 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(@Res() res: Response) {
-    res.render('login', {
-      title: 'Mi página de inicio',
-      layout: 'layout/main',
-      message: '¡Bienvenido a mi sitio web!',
-    });
-  }
+  // @Get()
+  // getHello(@Res() res: Response) {
+  //   res.render('login', {
+  //     title: 'Mi página de inicio',
+  //     layout: 'layout/main',
+  //     message: '¡Bienvenido a mi sitio web!',
+  //   });
+  // }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('admin')
-  getAdemin(@Res() res: Response) {
-    res.render('admin/index', {
-      title: 'Admin peros',
-      layout: 'layout/main',
-      message: '¡Bienvenido a mi sitio web!',
-    });
-  }
+  // @UseGuards(JwtAuthGuard)
+  // @Get('admin')
+  // getAdemin(@Res() res: Response) {
+  //   res.render('admin/index', {
+  //     title: 'Admin peros',
+  //     layout: 'layout/main',
+  //     message: '¡Bienvenido a mi sitio web!',
+  //   });
+  // }
 }

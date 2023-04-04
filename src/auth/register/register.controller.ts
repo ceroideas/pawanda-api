@@ -1,31 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
+import { UserRegisterDto } from './dto/create-register.dto';
 import { RegisterService } from './register.service';
 
-import { UpdateRegisterDto } from './dto/update-register.dto';
-
-@Controller('register')
+@Controller('/api/auth')
 export class RegisterController {
   constructor(private readonly registerService: RegisterService) {}
 
-  @Post()
-
-  @Get()
-  findAll() {
-    return this.registerService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.registerService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRegisterDto: UpdateRegisterDto) {
-    return this.registerService.update(+id, updateRegisterDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.registerService.remove(+id);
+  @Post('/register')
+  findAll(@Body() user: UserRegisterDto) {
+    return this.registerService.registerUser(user);
   }
 }

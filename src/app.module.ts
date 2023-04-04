@@ -13,9 +13,7 @@ import { DatabaseModule } from './database/database.module';
 @Module({
   imports: [
     ConfigModule,
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
-    }),
+
     DatabaseModule,
     RegisterModule,
     SharedModule,

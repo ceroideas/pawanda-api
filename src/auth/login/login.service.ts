@@ -1,24 +1,54 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
+import Users from 'src/entities/user.entity';
+import { Repository } from 'typeorm';
+import { comparePassword } from '../encryptPassword/hash-and-compare';
 import { LoginDto } from './dto/create-login.dto';
-
 
 @Injectable()
 export class LoginService {
-  create(createLoginDto: LoginDto) {
-    return 'This action adds a new login';
-  }
+  constructor(
+    @InjectRepository(Users) private userRepository: Repository<Users>,
+    private jwtService: JwtService,
+  ) {}
 
-  findAll() {
-    return `This action returns all login`;
-  }
+  async login(login: LoginDto) {
+    const { password, email } = login;
 
-  findOne(id: number) {
-    return `This action returns a #${id} login`;
-  }
+    try {
+      const isUser = await this.userRepository.findOne({ where: { email } });
+      const passwordIsCorrect = await comparePassword(
+        password,
+        isUser.password,
+      );
 
+      if (!isUser)
+        throw new HttpException(
+          'EMAIL OR PASSWORD IS NOT VALID',
+          HttpStatus.NOT_FOUND,
+        );
+      if (!passwordIsCorrect)
+        throw new HttpException(
+          'EMAIL OR PASSWORD IS NOT VALID',
+          HttpStatus.BAD_REQUEST,
+        );
 
+      const payload = { id: isUser.id };
+      const token = this.jwtService.sign(payload);
 
-  remove(id: number) {
-    return `This action removes a #${id} login`;
+      delete isUser['password'];
+
+      const data = {
+        user: isUser,
+        token: token,
+      };
+
+      return data;
+    } catch (error) {
+      Logger.log('ERROR in login.service.login ', error);
+
+      return error;
+    }
   }
 }

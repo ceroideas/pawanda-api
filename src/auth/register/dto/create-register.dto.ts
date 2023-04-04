@@ -1,19 +1,19 @@
+import { IsNotEmpty } from 'class-validator';
 
-import { IsNotEmpty } from "class-validator";
-import { LoginDto } from "src/auth/login/dto/create-login.dto";
+export class UserRegisterDto {
+  @IsNotEmpty()
+  name: string;
 
+  @IsNotEmpty()
+  email: string;
 
-export  class UserRegisterDto extends LoginDto
- {
+  @IsNotEmpty()
+  password: string;
 
+  @IsNotEmpty()
+  phone: string;
 
-    @IsNotEmpty()
-    first_name:string;
+  photo: string;
 
-
-    @IsNotEmpty()
-    last_name:string;
-
-    
-
+  status: number;
 }
