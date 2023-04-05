@@ -1,12 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
+import Users from './user.entity';
 
 @Entity()
 export default class Profile {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
-  user_id: number;
+  @OneToOne(() => Users, (user) => user.profile)
+  user: Users;
 
   @Column({ nullable: true })
   address: string;

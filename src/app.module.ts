@@ -10,6 +10,7 @@ import { LoginModule } from './auth/login/login.module';
 import { SharedModule } from './shared/shared.module';
 import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
+import { ProfileModule } from './profile/profile.module';
 @Module({
   imports: [
     ConfigModule,
@@ -18,6 +19,7 @@ import { DatabaseModule } from './database/database.module';
     RegisterModule,
     SharedModule,
     LoginModule,
+    ProfileModule,
   ],
   controllers: [AppController],
   providers: [AppService],
