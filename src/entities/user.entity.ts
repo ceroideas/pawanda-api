@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
+import Dogs from './dogs.entity';
 import Profile from './profile.entity';
 
 @Entity()
@@ -30,6 +32,9 @@ export default class Users {
   @OneToOne(() => Profile, (profile) => profile.user, { cascade: true })
   @JoinColumn()
   profile: Profile;
+
+  @OneToMany(() => Dogs, (dog) => dog.id)
+  sections: Dogs[];
 
   @Column({ nullable: true })
   status: number;

@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
 import { ProfileModule } from './profile/profile.module';
+import { DogsModule } from './dogs/dogs.module';
 @Module({
   imports: [
     ConfigModule,
@@ -20,6 +21,7 @@ import { ProfileModule } from './profile/profile.module';
     SharedModule,
     LoginModule,
     ProfileModule,
+    DogsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

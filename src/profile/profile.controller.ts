@@ -24,20 +24,16 @@ export class ProfileController {
     return this.profileService.create(profile, req);
   }
 
-  @Get()
-  findAll() {
-    return this.profileService.findAll();
-  }
-
-  @Get('user')
+  @Get('me')
   @UseGuards(JwtAuthGuard)
   getProfileUser(@Req() req) {
     return this.profileService.getProfileUser(req);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto) {
-    return this.profileService.update(+id, updateProfileDto);
+  @Patch()
+  @UseGuards(JwtAuthGuard)
+  update(@Body() updateProfileDto: UpdateProfileDto, @Req() req) {
+    return this.profileService.update(updateProfileDto, req);
   }
 
   @Delete(':id')

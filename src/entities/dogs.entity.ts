@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import Users from './user.entity';
 
 @Entity()
 export default class Dogs {
@@ -18,10 +19,13 @@ export default class Dogs {
   photo_3: string;
 
   @Column({ nullable: true })
-  name: number;
+  name: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   comments: string;
+
+  @ManyToOne(() => Users, (user) => user.id)
+  user: Users | string;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

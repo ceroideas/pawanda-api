@@ -45,7 +45,7 @@ import Payments from 'src/entities/payments.entity';
             Cards,
             Bank_datas,
           ],
-          synchronize: false,
+          synchronize: true,
           logging: ['query', 'error', 'schema'],
           migrationsTableName: 'migrations',
           migrations: [__dirname + '/../migrations/*{.ts,.js}'],

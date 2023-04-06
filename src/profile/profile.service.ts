@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import Profile from 'src/entities/profile.entity';
 import { Repository } from 'typeorm';
@@ -18,17 +18,27 @@ export class ProfileService {
     return profileCreate;
   }
 
-  findAll() {}
-
-  getProfileUser(req) {
-    const profileCreate = this.profileRepository.findOne({
+  async getProfileUser(req) {
+    const profileCreate = await this.profileRepository.findOne({
       where: { user: req.user },
     });
     return profileCreate;
   }
 
-  update(id: number, updateProfileDto: UpdateProfileDto) {
-    return `This action updates a #${id} profile`;
+  async update(profile: UpdateProfileDto, req) {
+    const profileExist = await this.profileRepository.findOne({
+      where: { user: req.user },
+    });
+
+    if (!profileExist) {
+      throw new HttpException('Profile not found', HttpStatus.NOT_FOUND);
+    }
+
+    const profileUpdated = await this.profileRepository.save({
+      id: profileExist.id,
+      ...profile,
+    });
+    return profileUpdated;
   }
 
   remove(id: number) {
