@@ -18,8 +18,8 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Post()
+  @UseGuards(JwtAuthGuard)
   create(@Body() profile: CreateProfileDto, @Req() req) {
     return this.profileService.create(profile, req);
   }

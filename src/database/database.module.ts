@@ -7,7 +7,7 @@ import Users from 'src/entities/user.entity';
 import Walks from 'src/entities/walks.entity';
 import Rooms from 'src/entities/rooms.entity';
 import Races from 'src/entities/races.entity';
-import Puntuations from 'src/entities/puntuations.entity';
+import Punctuations from 'src/entities/punctuations.entity';
 import Profile from 'src/entities/profile.entity';
 import Bank_datas from 'src/entities/bank_datas.entity';
 import Cards from 'src/entities/cards.entity';
@@ -35,7 +35,7 @@ import Payments from 'src/entities/payments.entity';
             Walks,
             Rooms,
             Races,
-            Puntuations,
+            Punctuations,
             Profile,
             Payments,
             Notifications,

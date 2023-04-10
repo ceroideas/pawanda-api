@@ -110,7 +110,7 @@ export class Profile1680287054887 implements MigrationInterface {
     );
     await queryRunner.createTable(
       new Table({
-        name: 'puntuations',
+        name: 'punctuations',
         columns: [
           {
             name: 'id',

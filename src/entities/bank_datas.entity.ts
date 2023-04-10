@@ -1,12 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import Users from './user.entity';
 
 @Entity()
 export default class Bank_datas {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
-  user_id: number;
+  @ManyToOne(() => Users, (user) => user.id)
+  user: number | Users;
 
   @Column({ nullable: true })
   name: string;

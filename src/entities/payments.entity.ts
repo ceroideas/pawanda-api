@@ -1,18 +1,28 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
+import Users from './user.entity';
+import Walks from './walks.entity';
 
 @Entity()
 export default class Payments {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
-  walk_id: number;
+  @OneToOne(() => Walks, (walk) => walk.payment)
+  @JoinColumn()
+  walk: number | Walks;
 
   @Column({ nullable: true })
   amount: number;
 
-  @Column({ nullable: true })
-  user_id: number;
+  @ManyToOne(() => Users, (user) => user.id)
+  user: number | Users;
 
   @Column({ type: 'datetime', nullable: true })
   date: Date;

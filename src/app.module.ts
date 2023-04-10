@@ -12,6 +12,15 @@ import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
 import { ProfileModule } from './profile/profile.module';
 import { DogsModule } from './dogs/dogs.module';
+import { RacesModule } from './races/races.module';
+import { WalksModule } from './walks/walks.module';
+import { PunctuationsModule } from './punctuations/punctuations.module';
+import { NotificationsModule } from './notifications/notifications.module';
+import { PaymentsModule } from './payments/payments.module';
+import { CardsModule } from './cards/cards.module';
+import { BankDataModule } from './bank-data/bank-data.module';
+import { DisponibilitiesModule } from './disponibilities/disponibilities.module';
+
 @Module({
   imports: [
     ConfigModule,
@@ -22,6 +31,14 @@ import { DogsModule } from './dogs/dogs.module';
     LoginModule,
     ProfileModule,
     DogsModule,
+    RacesModule,
+    WalksModule,
+    PunctuationsModule,
+    NotificationsModule,
+    PaymentsModule,
+    CardsModule,
+    BankDataModule,
+    DisponibilitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

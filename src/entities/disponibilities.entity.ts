@@ -1,12 +1,20 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
+import Users from './user.entity';
 
 @Entity()
 export default class Disponibilities {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
-  user_id: number;
+  @ManyToOne(() => Users, (user) => user.id)
+  user: number | Users;
 
   @Column({ nullable: true })
   address: string;

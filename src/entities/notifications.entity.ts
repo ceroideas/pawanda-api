@@ -14,7 +14,7 @@ export default class Notifications {
   @Column({ nullable: true })
   type: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   info: string;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })

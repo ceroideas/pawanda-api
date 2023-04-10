@@ -1,12 +1,24 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToOne,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
+import Dogs from './dogs.entity';
+import Payments from './payments.entity';
+import Users from './user.entity';
+import WalkDogs from './walk_dogs.entity';
 
 @Entity()
 export default class Walks {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
-  user_id: number;
+  @ManyToOne(() => Users, (user) => user.id)
+  user: number | Users;
 
   @Column({ nullable: true })
   address: string;
@@ -20,11 +32,17 @@ export default class Walks {
   @Column({ nullable: true })
   hour_from: string;
 
+  @ManyToMany(() => Dogs)
+  dog: number | Dogs[] | Dogs;
+
   @Column({ nullable: true })
   hour_to: string;
 
   @Column({ nullable: true })
   days: string;
+
+  @OneToOne(() => Payments, (payment) => payment.walk, { cascade: true })
+  payment: number | Walks;
 
   @Column({ type: 'datetime', nullable: true })
   date: Date;

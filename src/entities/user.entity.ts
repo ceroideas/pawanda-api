@@ -6,6 +6,7 @@ import {
   JoinColumn,
   OneToMany,
 } from 'typeorm';
+import Disponibilities from './disponibilities.entity';
 import Dogs from './dogs.entity';
 import Profile from './profile.entity';
 
@@ -34,7 +35,7 @@ export default class Users {
   profile: Profile;
 
   @OneToMany(() => Dogs, (dog) => dog.id)
-  sections: Dogs[];
+  dog: number | Dogs;
 
   @Column({ nullable: true })
   status: number;
