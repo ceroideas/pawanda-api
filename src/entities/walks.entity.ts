@@ -10,7 +10,6 @@ import {
 import Dogs from './dogs.entity';
 import Payments from './payments.entity';
 import Users from './user.entity';
-import WalkDogs from './walk_dogs.entity';
 
 @Entity()
 export default class Walks {
@@ -32,8 +31,9 @@ export default class Walks {
   @Column({ nullable: true })
   hour_from: string;
 
-  @ManyToMany(() => Dogs)
-  dog: number | Dogs[] | Dogs;
+  @ManyToMany(() => Dogs, (dog) => dog.id)
+  @JoinTable({ name: 'walks_dogs' })
+  dog: number | Dogs[] | Dogs | number[];
 
   @Column({ nullable: true })
   hour_to: string;

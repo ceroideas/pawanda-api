@@ -1,19 +1,26 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import Dogs from 'src/entities/dogs.entity';
 import Walks from 'src/entities/walks.entity';
 import { Repository } from 'typeorm';
 import { CreateWalkDto } from './dto/create-walk.dto';
 import { UpdateWalkDto } from './dto/update-walk.dto';
-
+import { In } from 'typeorm';
 @Injectable()
 export class WalksService {
   constructor(
     @InjectRepository(Walks) private walkRepository: Repository<Walks>,
+    @InjectRepository(Dogs) private dogRepository: Repository<Dogs>,
   ) {}
 
-  create(walk: any, req) {
+  async create(walk: any, req) {
     walk.user = req.user.id;
-    const walkCreate = this.walkRepository.save(walk);
+
+    const dog = await this.dogRepository.find({ where: { id: In(walk.dog) } });
+
+    walk.dog = dog;
+
+    const walkCreate = await this.walkRepository.save(walk);
 
     return walkCreate;
   }
@@ -25,7 +32,10 @@ export class WalksService {
   }
 
   async findOne(id: number) {
-    const walk = await this.walkRepository.findOneBy({ id });
+    const walk = await this.walkRepository.findOne({
+      where: { id },
+      relations: ['dog'],
+    });
     return walk;
   }
   async update(id: number, walk: any) {

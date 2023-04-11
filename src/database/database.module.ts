@@ -16,6 +16,7 @@ import Dogs from 'src/entities/dogs.entity';
 import Messages from 'src/entities/messages.entity';
 import Notifications from 'src/entities/notifications.entity';
 import Payments from 'src/entities/payments.entity';
+import Histories from 'src/entities/histories.entity';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import Payments from 'src/entities/payments.entity';
             Disponibilities,
             Cards,
             Bank_datas,
+            Histories,
           ],
           synchronize: true,
           logging: ['query', 'error', 'schema'],

@@ -11,7 +11,6 @@ import Punctuations from './punctuations.entity';
 import Races from './races.entity';
 import Users from './user.entity';
 import Walks from './walks.entity';
-import WalkDogs from './walk_dogs.entity';
 
 // async getUsersWithRole(roleName: string): Promise<User[]> {
 //   const usersWithRole = await this.userRepository
@@ -28,13 +27,8 @@ export default class Dogs {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
   @ManyToOne(() => Races, (race) => race.id)
-  race: string;
-
-  @ManyToMany(() => Walks)
-  @JoinTable({ name: 'walks_dogs' })
-  walk: number | Walks[] | Walks;
+  race: string | Races;
 
   @Column({ nullable: true })
   photo_1: string;
