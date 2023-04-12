@@ -45,7 +45,7 @@ export default class Dogs {
   @Column({ type: 'text', nullable: true })
   comments: string;
 
-  @ManyToOne(() => Users, (user) => user.id)
+  @ManyToOne(() => Users, (user) => user.id, { cascade: true })
   user: number | Users;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })

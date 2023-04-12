@@ -16,13 +16,13 @@ export default class Punctuations {
   @Column({ nullable: true })
   comment: string;
 
-  @ManyToOne(() => Dogs, (dog) => dog.id)
+  @ManyToOne(() => Dogs, (dog) => dog.id, { cascade: true })
   dog: number | Dogs;
 
-  @ManyToOne(() => Users, (user) => user.id)
+  @ManyToOne(() => Users, (user) => user.id, { cascade: true })
   user: number | Users;
 
-  @ManyToOne(() => Users, (user) => user.id)
+  @ManyToOne(() => Users, (user) => user.id, { cascade: true })
   walker: number | Users;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })

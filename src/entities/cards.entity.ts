@@ -6,7 +6,7 @@ export default class Cards {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Users, (user) => user.id)
+  @ManyToOne(() => Users, (user) => user.id, { cascade: true })
   user: number | Users;
 
   @Column({ nullable: true })

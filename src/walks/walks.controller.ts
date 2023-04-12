@@ -24,6 +24,12 @@ export class WalksController {
     return this.walksService.create(createWalkDto, req);
   }
 
+  @Post('historie')
+  @UseGuards(JwtAuthGuard)
+  createHistorie(@Body() walk: CreateWalkDto, @Req() req) {
+    return this.walksService.create(walk, req);
+  }
+
   @Get()
   @UseGuards(JwtAuthGuard)
   findAll(@Req() req) {

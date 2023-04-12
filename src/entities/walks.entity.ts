@@ -16,7 +16,7 @@ export default class Walks {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Users, (user) => user.id)
+  @ManyToOne(() => Users, (user) => user.id, { cascade: true })
   user: number | Users;
 
   @Column({ nullable: true })
@@ -31,7 +31,7 @@ export default class Walks {
   @Column({ nullable: true })
   hour_from: string;
 
-  @ManyToMany(() => Dogs, (dog) => dog.id)
+  @ManyToMany(() => Dogs, (dog) => dog.id, { cascade: true })
   @JoinTable({ name: 'walks_dogs' })
   dog: number | Dogs[] | Dogs | number[];
 

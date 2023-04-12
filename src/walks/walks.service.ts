@@ -6,11 +6,14 @@ import { Repository } from 'typeorm';
 import { CreateWalkDto } from './dto/create-walk.dto';
 import { UpdateWalkDto } from './dto/update-walk.dto';
 import { In } from 'typeorm';
+import Histories from 'src/entities/histories.entity';
 @Injectable()
 export class WalksService {
   constructor(
     @InjectRepository(Walks) private walkRepository: Repository<Walks>,
     @InjectRepository(Dogs) private dogRepository: Repository<Dogs>,
+    @InjectRepository(Histories)
+    private hitorieRepository: Repository<Histories>,
   ) {}
 
   async create(walk: any, req) {
@@ -23,6 +26,16 @@ export class WalksService {
     const walkCreate = await this.walkRepository.save(walk);
 
     return walkCreate;
+  }
+
+  async createHistorie(walk: any, req) {
+    const historie = {
+      walk_id: walk.id,
+      user_id: req.user.id,
+      walker_id: walk.walker_id,
+    };
+    const newHistorie = await this.hitorieRepository.save(historie);
+    return newHistorie;
   }
 
   async findAll(req) {

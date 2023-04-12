@@ -20,6 +20,7 @@ import { PaymentsModule } from './payments/payments.module';
 import { CardsModule } from './cards/cards.module';
 import { BankDataModule } from './bank-data/bank-data.module';
 import { DisponibilitiesModule } from './disponibilities/disponibilities.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { DisponibilitiesModule } from './disponibilities/disponibilities.module'
     CardsModule,
     BankDataModule,
     DisponibilitiesModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

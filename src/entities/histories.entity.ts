@@ -14,6 +14,9 @@ export default class Histories {
   @Column({ nullable: true })
   walker_id: number;
 
+  @Column({ nullable: true })
+  status: string;
+
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 }
