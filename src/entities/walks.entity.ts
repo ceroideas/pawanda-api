@@ -31,7 +31,7 @@ export default class Walks {
   @Column({ nullable: true })
   hour_from: string;
 
-  @ManyToMany(() => Dogs, (dog) => dog.id, { cascade: true })
+  @ManyToMany(() => Dogs, (dog) => dog.walk)
   @JoinTable({ name: 'walks_dogs' })
   dog: number | Dogs[] | Dogs | number[];
 

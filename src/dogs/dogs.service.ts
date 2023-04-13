@@ -25,7 +25,10 @@ export class DogsService {
   }
 
   async findOne(id: number) {
-    const dog = await this.dogRepository.findOneBy({ id });
+    const dog = await this.dogRepository.findOne({
+      where: { id },
+      relations: ['walk'],
+    });
     return dog;
   }
 

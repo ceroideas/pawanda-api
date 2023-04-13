@@ -39,6 +39,9 @@ export default class Dogs {
   @Column({ nullable: true })
   photo_3: string;
 
+  @ManyToMany(() => Walks, (walk) => walk.dog, { cascade: true })
+  walk: number | Walks[] | Walks | number[];
+
   @Column({ nullable: true })
   name: string;
 
