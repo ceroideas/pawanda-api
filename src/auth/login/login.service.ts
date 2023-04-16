@@ -16,6 +16,8 @@ export class LoginService {
   async login(login: LoginDto) {
     const { password, email } = login;
 
+    console.log(password, email);
+
     try {
       const isUser = await this.userRepository.findOne({ where: { email } });
       const passwordIsCorrect = await comparePassword(
@@ -33,6 +35,33 @@ export class LoginService {
           'EMAIL OR PASSWORD IS NOT VALID',
           HttpStatus.BAD_REQUEST,
         );
+
+      const payload = { id: isUser.id };
+      const token = this.jwtService.sign(payload);
+
+      delete isUser['password'];
+
+      const data = {
+        user: isUser,
+        token: token,
+      };
+
+      return data;
+    } catch (error) {
+      Logger.log('ERROR in login.service.login ', error);
+
+      return error;
+    }
+  }
+
+  async socialLogin(login) {
+    const { email } = login.user;
+
+    try {
+      const isUser = await this.userRepository.findOne({ where: { email } });
+
+      if (!isUser)
+        throw new HttpException('EMAIL IS NOT VALID', HttpStatus.NOT_FOUND);
 
       const payload = { id: isUser.id };
       const token = this.jwtService.sign(payload);

@@ -25,6 +25,12 @@ export default class Users {
   password: string;
 
   @Column({ nullable: true })
+  provider: string;
+
+  @Column({ nullable: true })
+  providerId: string;
+
+  @Column({ nullable: true })
   phone: string;
 
   @Column({ nullable: true })

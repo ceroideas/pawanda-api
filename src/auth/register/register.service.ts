@@ -21,7 +21,7 @@ export class RegisterService {
 
       const hashPassword = await hashpassword(password);
 
-      user = { ...user, password: hashPassword };
+      user = { ...user, password: hashPassword, provider: 'local' };
 
       const newUser = await this.userRepository.save(user);
 

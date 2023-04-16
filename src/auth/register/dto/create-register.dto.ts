@@ -13,6 +13,8 @@ export class UserRegisterDto {
   @IsNotEmpty()
   phone: string;
 
+  provider: string;
+
   photo: string;
 
   status: number;

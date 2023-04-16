@@ -47,7 +47,7 @@ import Histories from 'src/entities/histories.entity';
             Bank_datas,
             Histories,
           ],
-          synchronize: true,
+          synchronize: false,
           logging: ['query', 'error', 'schema'],
           migrationsTableName: 'migrations',
           migrations: [__dirname + '/../migrations/*{.ts,.js}'],
