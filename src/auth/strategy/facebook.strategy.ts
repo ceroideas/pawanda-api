@@ -1,37 +1,35 @@
-import { Inject, Injectable } from '@nestjs/common';
-
+import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Profile, Strategy } from 'passport-facebook';
 import Users from 'src/entities/user.entity';
-import { Strategy, VerifyCallback } from 'passport-google-oauth2';
+import { Repository } from 'typeorm';
 
 @Injectable()
-export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
+export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
   constructor(
     @InjectRepository(Users) private userRepository: Repository<Users>,
   ) {
     super({
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3001/api/auth/google/callback',
-      scope: ['email', 'profile'],
+      clientID: process.env.APP_ID,
+      clientSecret: process.env.APP_SECRET,
+      callbackURL: 'http://localhost:3001/api/auth/facebook/redirect',
+      scope: 'email',
+      profileFields: ['emails', 'name', 'picture'],
     });
   }
 
   async validate(
-    _accessToken: string,
-    _refreshToken: string,
-    profile: any,
-
-    done: VerifyCallback,
+    accessToken: string,
+    refreshToken: string,
+    profile: Profile,
+    done: (err: any, user: any, info?: any) => void,
     req: any,
   ): Promise<any> {
-    const { id, name, emails, photos } = profile;
+    const { name, emails, photos } = profile;
     const familyName = name.familyName ? name.familyName : '';
-
     const user = {
-      provider: 'google',
+      provider: 'facebook',
       providerId: profile.id,
       email: emails[0].value,
       name: `${name.givenName} ${familyName} `,
