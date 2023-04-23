@@ -23,8 +23,10 @@ async function bootstrap() {
 
   app.use(passport.initialize());
   app.use(passport.session());
-  app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
+  console.log();
+  app.useStaticAssets(join(__dirname, '..', 'public'));
+
   app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: false }));
   app.setViewEngine('hbs');
   await app.listen(3001);

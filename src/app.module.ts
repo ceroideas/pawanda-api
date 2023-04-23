@@ -24,6 +24,9 @@ import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
     ConfigModule,
 
     DatabaseModule,
