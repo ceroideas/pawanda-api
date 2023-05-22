@@ -27,8 +27,13 @@ export default class Dogs {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Races, (race) => race.id)
-  race: string | Races;
+  // @ManyToOne(() => Races, (race) => race.id)
+  // race: string | Races;
+
+
+  @Column({ nullable: true })
+  race: string;
+
 
   @Column({ nullable: true })
   photo_1: string;
@@ -50,6 +55,12 @@ export default class Dogs {
 
   @ManyToOne(() => Users, (user) => user.id, { cascade: true })
   user: number | Users;
+
+  @Column({ type: 'boolean', default: false })
+  pp: boolean;
+
+  @Column({ nullable: true })
+  weight: number;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import Users from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
@@ -17,7 +17,11 @@ export class RegisterService {
 
       const userExist = await this.userRepository.findOne({ where: { email } });
 
-      if (userExist) throw new HttpException('EMAIL_IS_ALREADY_TAKE', 403);
+      if (userExist)
+        throw new HttpException(
+          'El email ya esta en uso',
+          HttpStatus.FORBIDDEN,
+        );
 
       const hashPassword = await hashpassword(password);
 

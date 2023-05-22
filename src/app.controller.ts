@@ -2,6 +2,7 @@ import { Controller, Get, Render, Res, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Response } from 'express';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { AdminGuard } from './auth/guards/admin.guard';
 
 @Controller()
 export class AppController {
@@ -16,8 +17,8 @@ export class AppController {
     });
   }
 
-  // @UseGuards(JwtAuthGuard)
   @Get()
+  @UseGuards(AdminGuard)
   getAdemin(@Res() res: Response) {
     res.render('admin/index', {
       title: 'Admin peros',

@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import Profile from 'src/entities/profile.entity';
+import Users from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
@@ -9,6 +10,7 @@ import { UpdateProfileDto } from './dto/update-profile.dto';
 export class ProfileService {
   constructor(
     @InjectRepository(Profile) private profileRepository: Repository<Profile>,
+    @InjectRepository(Users) private userRepository: Repository<Users>,
   ) {}
 
   async create(profile: CreateProfileDto, req) {
@@ -22,7 +24,8 @@ export class ProfileService {
     const profileCreate = await this.profileRepository.findOne({
       where: { user: req.user },
     });
-    return profileCreate;
+    return req.user;
+    // return profileCreate;
   }
 
   async update(profile: UpdateProfileDto, req) {
