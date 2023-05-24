@@ -60,7 +60,7 @@ export default class Dogs {
   pp: boolean;
 
   @Column({ nullable: true })
-  weight: number;
+  size: number;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
