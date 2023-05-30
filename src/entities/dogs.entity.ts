@@ -56,7 +56,7 @@ export default class Dogs {
   @ManyToOne(() => Users, (user) => user.id, { cascade: true })
   user: number | Users;
 
-  @Column({ type: 'boolean', default: false })
+  @Column({ type: 'boolean', nullable: true, default: false })
   pp: boolean;
 
   @Column({ nullable: true })
@@ -64,4 +64,7 @@ export default class Dogs {
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
+
+  @Column({ nullable: false })
+  userId: number;
 }

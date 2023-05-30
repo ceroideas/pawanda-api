@@ -58,4 +58,7 @@ export default class Walks {
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
+
+  @Column({ nullable: false })
+  userId: number;
 }

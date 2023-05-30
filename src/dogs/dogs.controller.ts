@@ -27,6 +27,7 @@ export class DogsController {
   @Get('me')
   @UseGuards(JwtAuthGuard)
   findAll(@Req() req) {
+    console.log(req.user.id);
     return this.dogsService.findAll(req);
   }
 

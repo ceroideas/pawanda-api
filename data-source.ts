@@ -5,8 +5,8 @@ export const dataSourceOptions: DataSourceOptions = {
   type: 'mysql',
   host: 'localhost',
   port: 3306,
-  username: 'root',
-  password: '',
+  username: 'pawanda',
+  password: '4@Rr1iz91',
   database: 'pawanda',
   migrations: [Profile1680287054887],
 };

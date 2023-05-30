@@ -20,7 +20,7 @@ export class DogsService {
   }
 
   async findAll(req) {
-    const userDogs = await this.dogRepository.find({ where: { user: req.id } });
+    const userDogs = await this.dogRepository.find({ where: { userId: req.user.id } });
     return userDogs;
   }
 

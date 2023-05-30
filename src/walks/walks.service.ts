@@ -39,7 +39,7 @@ export class WalksService {
   }
 
   async findAll(req) {
-    const walks = await this.walkRepository.find({ where: { user: req.id } });
+    const walks = await this.walkRepository.find({ where: { userId: req.user.id } });
 
     return walks;
   }
