@@ -13,6 +13,7 @@ export class DogsService {
 
   async create(dog: any, req) {
     dog.user = req.user.id;
+    dog.userId = req.user.id;
 
     const newDog = await this.dogRepository.save(dog);
 

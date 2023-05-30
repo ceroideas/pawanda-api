@@ -18,6 +18,7 @@ export class WalksService {
 
   async create(walk: any, req) {
     walk.user = req.user.id;
+    walk.userId = req.user.id;
 
     const dog = await this.dogRepository.find({ where: { id: In(walk.dog) } });
 
